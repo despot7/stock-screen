@@ -1,0 +1,173 @@
+
+<h1><font size="900", color="#ACBEBE", style="font-family:georgia"><center>Market Moment</center></font></h1>
+
+<br/>
+
+<center>
+  <%= form_tag root_path, :method => 'POST' do %>
+  <%= text_field_tag 'id', nil, size: 20, style: 'height: 60px; font-size: 25px; border-radius:40px; color: #20232A'%>
+  <%= submit_tag 'Search', style: 'height: 50px; border-radius:50px; background-color:#ACBEBE; font-size: 25px; color:#20232A' %>
+</center>
+
+
+<% end %>
+
+<br/><br/>
+
+<h4><table class="table table-hover", style="font-family:georgia; background-color:#F8F5F2; color:#20232A">
+  <thead>
+    <tr style="color:#F4F4EF; background-color:#A01D26">
+      <th>Ticker</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>$ Δ</th>
+      <th>% Δ</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <th scope="row">SPY</th>
+      <td>S & P 500</td>
+      <% stock = StockQuote::Stock.quote("SPY")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">QQQ</th>
+      <td>NASDAQ</td>
+      <% stock = StockQuote::Stock.quote("QQQ")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">IWM</th>
+      <td>Russell 2000</td>
+      <% stock = StockQuote::Stock.quote("IWM")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    
+<tr>
+    <th scope="row", style="height: 40px"></th>
+    <td></td> <td></td> <td></td> <td></td>
+</tr>
+    
+    <tr>
+      <th scope="row">TLT</th>
+      <td>20 year Bond</td>
+      <% stock = StockQuote::Stock.quote("TLT")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">TBT</th>
+      <td>20 year Bond - Inverse</td>
+      <% stock = StockQuote::Stock.quote("TBT")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+
+<tr>
+    <th scope="row", style="height: 40px"></th>
+    <td></td> <td></td> <td></td> <td></td>
+</tr>
+    
+    <tr>
+      <th scope="row">GLD</th>
+      <td>Gold</td>
+      <% stock = StockQuote::Stock.quote("GLD")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">SLV</th>
+      <td>Silver</td>
+      <% stock = StockQuote::Stock.quote("SLV")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">USO</th>
+      <td>U.S. Oil</td>
+      <% stock = StockQuote::Stock.quote("USO")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+  
+<tr>
+    <th scope="row", style="height: 40px"></th>
+    <td></td> <td></td> <td></td> <td></td>
+</tr>
+
+    <tr>
+      <th scope="row">XLF</th>
+      <td>Financial Sector</td>
+      <% stock = StockQuote::Stock.quote("XLF")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">XLE</th>
+      <td>Energy Sector</td>
+      <% stock = StockQuote::Stock.quote("XLE")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    <tr>
+      <th scope="row">XLP</th>
+      <td>Consumer Staples Sector</td>
+      <% stock = StockQuote::Stock.quote("XLP")%>
+      <td><%= stock.l %></td>
+      <td><%= stock.c %></td>
+      <td><%= stock.cp %> %</td>
+    </tr>
+    
+</h4>
+
+      
+<% if @stock %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><strong> <%= @stock.name %> - <%= @stock.symbol %></h2></center>
+  </div>
+  <div class="panel-body; background-color: #20232A">
+        
+    <div class="col-md-4">
+    <h1>$ <%= @stock.l %> </h1> <br/>
+    <strong> Change:</strong> <%= @stock.c %> <br/><br/>
+    <strong> Change Percentage:</strong> <%= @stock.cp %> <br/><br/>
+    <strong> Day's Range: </strong> <%= @stock.lo %> - <%= @stock.hi %> <br/><br/>
+    <strong> Price to Earnings Ratio: </strong> <%=@stock.pe %> <br/><br/>
+    <strong> Market Cap: </strong> <%= @stock.mc %> <br/><br/>
+    <strong> 52 Week Range: </strong> <%= @stock.lo52 %> - <%= @stock.hi52 %> <br/><br/>
+    <strong> Exchange: </strong> <%= @stock.e %> <br/><br/>
+    </div>
+    <div class="col-md-8"> <br/><br/>
+    <%= @stock.summary[0]['overview']%> <br/>
+    </div>
+ 
+<% elsif @nothing %>
+    <%= @nothing %>
+<% end %>
+
+<% if @error %>
+    <%= @error %>
+<% end %>
+
+<% if @spy %>
+    <%= @spy %>
+<% end %>
+
+  </div>
+</div>
